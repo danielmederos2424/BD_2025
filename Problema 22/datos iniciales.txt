@@ -1,0 +1,86 @@
+-- Planetas
+INSERT INTO Planets (scientific_name, common_name, population, galactic_x, galactic_y, galactic_z) VALUES
+('TER-001', 'Tierra', 7800000000, 0.00, 0.00, 0.00),
+('VUL-002', 'Vulcano', 6200000000, 16.23, -23.45, 8.90),
+('KLI-003', 'Qo''noS', 12400000000, -45.67, 89.12, -12.34);
+
+-- Montañas
+INSERT INTO Mountains (planet_id, name, height) VALUES
+(1, 'Monte Everest', 8848.86),
+(1, 'Monte K2', 8611.00),
+(2, 'Monte T''Rang', 12458.32),
+(3, 'Primera Colina', 15234.67);
+
+-- Imperios
+INSERT INTO Empires (galactic_code, name, avg_temperature) VALUES
+('UFP-001', 'Federación Unida de Planetas', 15.5),
+('KLE-002', 'Imperio Klingon', 21.8),
+('RSE-003', 'Imperio Romulano', 18.3);
+
+-- Asignación de Planetas a Imperios
+INSERT INTO Planet_Empires (planet_id, empire_id) VALUES
+(1, 1),  -- Tierra - Federación
+(2, 1),  -- Vulcano - Federación
+(3, 2);  -- Qo'noS - Imperio Klingon
+
+-- Razas
+INSERT INTO Races (scientific_name) VALUES
+('Homo sapiens'),
+('Vulcanis sapiens'),
+('Klingonis honoris');
+
+-- Habilidades de Razas
+INSERT INTO Race_Skills (race_id, skill_description) VALUES
+(1, 'Adaptabilidad excepcional'),
+(1, 'Innovación tecnológica'),
+(2, 'Control mental superior'),
+(2, 'Fuerza física aumentada'),
+(3, 'Resistencia extraordinaria'),
+(3, 'Combate cuerpo a cuerpo');
+
+-- Distribución de Razas en Planetas
+INSERT INTO Planet_Races (planet_id, race_id, population_percentage) VALUES
+(1, 1, 98.5),  -- Humanos en la Tierra
+(2, 2, 99.2),  -- Vulcanos en Vulcano
+(3, 3, 97.8);  -- Klingons en Qo'noS
+
+-- Flotas
+INSERT INTO Fleets (galactic_code, destination, empire_id) VALUES
+('FLT-001', 'Cuadrante Alfa', 1),
+('FLT-002', 'Cuadrante Beta', 2),
+('FLT-003', 'Cuadrante Gamma', 1);
+
+-- Misiones de Flotas
+INSERT INTO Fleet_Missions (fleet_id, mission_type) VALUES
+(1, 'Exploración'),
+(1, 'Investigación científica'),
+(2, 'Defensa territorial'),
+(2, 'Patrullaje'),
+(3, 'Diplomacia'),
+(3, 'Apoyo humanitario');
+
+-- Capitanes
+INSERT INTO Captains (identification_code, name, birth_planet_id, empire_id) VALUES
+('CPT-001', 'James T. Kirk', 1, 1),
+('CPT-002', 'Worf', 3, 2),
+('CPT-003', 'Spock', 2, 1);
+
+-- Maniobras
+INSERT INTO Maneuvers (name, energy_consumption) VALUES
+('Maniobra de Picard', 150),
+('Patrón de ataque Klingon', 300),
+('Evasión táctica Vulcana', 200);
+
+-- Naves
+INSERT INTO Ships (fleet_code, max_speed, energy, fleet_id, captain_id) VALUES
+('USS-001', 9.8, 1000, 1, 1),  -- Enterprise
+('KDF-002', 9.6, 1200, 2, 2),  -- Ave de Presa
+('USS-003', 9.7, 1100, 3, 3);  -- Vulcano
+
+-- Maniobras de las naves
+INSERT INTO Ship_Maneuvers (ship_id, maneuver_id) VALUES
+(1, 1),
+(1, 3),
+(2, 2),
+(3, 1),
+(3, 3);

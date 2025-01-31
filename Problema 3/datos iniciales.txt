@@ -1,0 +1,388 @@
+-- Insertar más países (además de los principales)
+INSERT INTO Countries (name) VALUES 
+('España'), ('Suiza'), ('Serbia'), ('Alemania'), ('Rusia'),
+('Argentina'), ('Italia'), ('Suecia'), ('República Checa'), ('Polonia'),
+('Japón'), ('Croacia'), ('Austria'), ('Bulgaria'), ('Grecia')
+ON CONFLICT (name) DO NOTHING;
+
+-- Insertar más sedes específicas
+DO $$ 
+DECLARE 
+    gb_id INTEGER;
+    us_id INTEGER;
+    fr_id INTEGER;
+    au_id INTEGER;
+BEGIN
+    SELECT country_id INTO gb_id FROM Countries WHERE name = 'Gran Bretaña';
+    SELECT country_id INTO us_id FROM Countries WHERE name = 'Estados Unidos';
+    SELECT country_id INTO fr_id FROM Countries WHERE name = 'Francia';
+    SELECT country_id INTO au_id FROM Countries WHERE name = 'Australia';
+    
+    INSERT INTO Venues (name, country_id, city) VALUES 
+    -- Sedes históricas y actuales
+    ('Centre Court, Wimbledon', gb_id, 'Londres'),
+    ('Court No. 1, Wimbledon', gb_id, 'Londres'),
+    ('Arthur Ashe Stadium', us_id, 'Nueva York'),
+    ('Louis Armstrong Stadium', us_id, 'Nueva York'),
+    ('Court Philippe-Chatrier', fr_id, 'París'),
+    ('Court Suzanne-Lenglen', fr_id, 'París'),
+    ('Rod Laver Arena', au_id, 'Melbourne'),
+    ('Margaret Court Arena', au_id, 'Melbourne')
+    ON CONFLICT (name, country_id) DO NOTHING;
+END $$;
+
+-- Insertar jugadores históricos y actuales
+INSERT INTO Players (name, gender, birth_date) VALUES
+-- Jugadores Masculinos
+('Rafael Nadal', 'M', '1986-06-03'),
+('Roger Federer', 'M', '1981-08-08'),
+('Novak Djokovic', 'M', '1987-05-22'),
+('Andy Murray', 'M', '1987-05-15'),
+('Carlos Alcaraz', 'M', '2003-05-05'),
+('Pete Sampras', 'M', '1971-08-12'),
+('Andre Agassi', 'M', '1970-04-29'),
+('Boris Becker', 'M', '1967-11-22'),
+('Stefan Edberg', 'M', '1966-01-19'),
+('Juan Martín del Potro', 'M', '1988-09-23'),
+-- Jugadoras Femeninas
+('Serena Williams', 'F', '1981-09-26'),
+('Venus Williams', 'F', '1980-06-17'),
+('Maria Sharapova', 'F', '1987-04-19'),
+('Martina Navratilova', 'F', '1956-10-18'),
+('Steffi Graf', 'F', '1969-06-14'),
+('Monica Seles', 'F', '1973-12-02'),
+('Chris Evert', 'F', '1954-12-21'),
+('Iga Świątek', 'F', '2001-05-31'),
+('Coco Gauff', 'F', '2004-03-13'),
+('Emma Raducanu', 'F', '2002-11-13');
+
+-- Insertar árbitros
+INSERT INTO Referees (name, country_id) 
+SELECT nombre, country_id
+FROM (VALUES
+    ('Carlos Ramos', (SELECT country_id FROM Countries WHERE name = 'España')),
+    ('Mohamed Lahyani', (SELECT country_id FROM Countries WHERE name = 'Suecia')),
+    ('Alison Hughes', (SELECT country_id FROM Countries WHERE name = 'Gran Bretaña')),
+    ('James Keothavong', (SELECT country_id FROM Countries WHERE name = 'Gran Bretaña')),
+    ('Eva Asderaki', (SELECT country_id FROM Countries WHERE name = 'Grecia')),
+    ('Marija Čičak', (SELECT country_id FROM Countries WHERE name = 'Croacia')),
+    ('Juan Zhang', (SELECT country_id FROM Countries WHERE name = 'España')),
+    ('Kader Nouni', (SELECT country_id FROM Countries WHERE name = 'Francia'))
+) AS datos(nombre, country_id);
+
+-- Insertar entrenadores
+INSERT INTO Coaches (name, country_id)
+SELECT nombre, country_id
+FROM (VALUES
+    ('Toni Nadal', (SELECT country_id FROM Countries WHERE name = 'España')),
+    ('Carlos Moyá', (SELECT country_id FROM Countries WHERE name = 'España')),
+    ('Ivan Lendl', (SELECT country_id FROM Countries WHERE name = 'República Checa')),
+    ('Boris Becker', (SELECT country_id FROM Countries WHERE name = 'Alemania')),
+    ('Patrick Mouratoglou', (SELECT country_id FROM Countries WHERE name = 'Francia')),
+    ('Darren Cahill', (SELECT country_id FROM Countries WHERE name = 'Australia')),
+    ('Magnus Norman', (SELECT country_id FROM Countries WHERE name = 'Suecia')),
+    ('Juan Carlos Ferrero', (SELECT country_id FROM Countries WHERE name = 'España'))
+) AS datos(nombre, country_id);
+
+-- Asignar nacionalidades a jugadores
+DO $$
+DECLARE
+    nadal_id INTEGER;
+    federer_id INTEGER;
+    djokovic_id INTEGER;
+    murray_id INTEGER;
+    serena_id INTEGER;
+    sharapova_id INTEGER;
+    alcaraz_id INTEGER;
+    sampras_id INTEGER;
+    agassi_id INTEGER;
+    becker_id INTEGER;
+    edberg_id INTEGER;
+    potro_id INTEGER;
+    venus_id INTEGER;
+    navratilova_id INTEGER;
+    graf_id INTEGER;
+    seles_id INTEGER;
+    evert_id INTEGER;
+    swiatek_id INTEGER;
+    gauff_id INTEGER;
+    raducanu_id INTEGER;
+
+BEGIN
+    -- Obtener IDs de jugadores
+    SELECT player_id INTO nadal_id FROM Players WHERE name = 'Rafael Nadal';
+    SELECT player_id INTO federer_id FROM Players WHERE name = 'Roger Federer';
+    SELECT player_id INTO djokovic_id FROM Players WHERE name = 'Novak Djokovic';
+    SELECT player_id INTO murray_id FROM Players WHERE name = 'Andy Murray';
+    SELECT player_id INTO serena_id FROM Players WHERE name = 'Serena Williams';
+    SELECT player_id INTO sharapova_id FROM Players WHERE name = 'Maria Sharapova';
+    SELECT player_id INTO alcaraz_id FROM Players WHERE name = 'Carlos Alcaraz';
+    SELECT player_id INTO sampras_id FROM Players WHERE name = 'Pete Sampras';
+    SELECT player_id INTO agassi_id FROM Players WHERE name = 'Andre Agassi';
+    SELECT player_id INTO becker_id FROM Players WHERE name = 'Boris Becker';
+    SELECT player_id INTO edberg_id FROM Players WHERE name = 'Stefan Edberg';
+    SELECT player_id INTO potro_id FROM Players WHERE name = 'Juan Martín del Potro';
+    SELECT player_id INTO venus_id FROM Players WHERE name = 'Venus Williams';
+    SELECT player_id INTO navratilova_id FROM Players WHERE name = 'Martina Navratilova';
+    SELECT player_id INTO graf_id FROM Players WHERE name = 'Steffi Graf';
+    SELECT player_id INTO seles_id FROM Players WHERE name = 'Monica Seles';
+    SELECT player_id INTO evert_id FROM Players WHERE name = 'Chris Evert';
+    SELECT player_id INTO swiatek_id FROM Players WHERE name = 'Iga Świątek';
+    SELECT player_id INTO gauff_id FROM Players WHERE name = 'Coco Gauff';
+    SELECT player_id INTO raducanu_id FROM Players WHERE name = 'Emma Raducanu';
+
+    -- Insertar nacionalidades
+    INSERT INTO PlayerNationalities (player_id, country_id)
+    VALUES
+    (nadal_id, (SELECT country_id FROM Countries WHERE name = 'España')),
+    (federer_id, (SELECT country_id FROM Countries WHERE name = 'Suiza')),
+    (djokovic_id, (SELECT country_id FROM Countries WHERE name = 'Serbia')),
+    (murray_id, (SELECT country_id FROM Countries WHERE name = 'Gran Bretaña')),
+    (serena_id, (SELECT country_id FROM Countries WHERE name = 'Estados Unidos')),
+    (sharapova_id, (SELECT country_id FROM Countries WHERE name = 'Rusia')),
+    (alcaraz_id, (SELECT country_id FROM Countries WHERE name = 'España')),
+    (sampras_id, (SELECT country_id FROM Countries WHERE name = 'Estados Unidos')),
+    (agassi_id, (SELECT country_id FROM Countries WHERE name = 'Estados Unidos')),
+    (becker_id, (SELECT country_id FROM Countries WHERE name = 'Alemania')),
+    (edberg_id, (SELECT country_id FROM Countries WHERE name = 'Suecia')),
+    (potro_id, (SELECT country_id FROM Countries WHERE name = 'Argentina')),
+    (venus_id, (SELECT country_id FROM Countries WHERE name = 'Estados Unidos')),
+    (navratilova_id, (SELECT country_id FROM Countries WHERE name = 'República Checa')),
+    (graf_id, (SELECT country_id FROM Countries WHERE name = 'Alemania')),
+    (seles_id, (SELECT country_id FROM Countries WHERE name = 'Serbia')),
+    (evert_id, (SELECT country_id FROM Countries WHERE name = 'Estados Unidos')),
+    (swiatek_id, (SELECT country_id FROM Countries WHERE name = 'Polonia')),
+    (gauff_id, (SELECT country_id FROM Countries WHERE name = 'Estados Unidos')),
+    (raducanu_id, (SELECT country_id FROM Countries WHERE name = 'Gran Bretaña'))
+    ON CONFLICT DO NOTHING;
+END $$;
+
+-- Insertar ediciones de torneos recientes
+DO $$
+DECLARE
+    wimbledon_id INTEGER;
+    usopen_id INTEGER;
+    rolandgarros_id INTEGER;
+    ausopen_id INTEGER;
+    venue_wimbledon INTEGER;
+    venue_usopen INTEGER;
+    venue_rolandgarros INTEGER;
+    venue_ausopen INTEGER;
+BEGIN
+    -- Obtener IDs de torneos
+    SELECT tournament_id INTO wimbledon_id FROM Tournaments WHERE name = 'Wimbledon';
+    SELECT tournament_id INTO usopen_id FROM Tournaments WHERE name = 'US Open';
+    SELECT tournament_id INTO rolandgarros_id FROM Tournaments WHERE name = 'Roland Garros';
+    SELECT tournament_id INTO ausopen_id FROM Tournaments WHERE name = 'Australian Open';
+
+    -- Obtener IDs de sedes principales
+    SELECT venue_id INTO venue_wimbledon FROM Venues WHERE name LIKE '%Centre Court%';
+    SELECT venue_id INTO venue_usopen FROM Venues WHERE name LIKE '%Arthur Ashe%';
+    SELECT venue_id INTO venue_rolandgarros FROM Venues WHERE name LIKE '%Philippe-Chatrier%';
+    SELECT venue_id INTO venue_ausopen FROM Venues WHERE name LIKE '%Rod Laver%';
+
+    -- Insertar ediciones de torneos (2023-2024)
+    INSERT INTO TournamentEditions (tournament_id, year, venue_id, start_date, end_date)
+    VALUES
+    -- 2023
+    (ausopen_id, 2023, venue_ausopen, '2023-01-16', '2023-01-29'),
+    (rolandgarros_id, 2023, venue_rolandgarros, '2023-05-28', '2023-06-11'),
+    (wimbledon_id, 2023, venue_wimbledon, '2023-07-03', '2023-07-16'),
+    (usopen_id, 2023, venue_usopen, '2023-08-28', '2023-09-10'),
+    -- 2024
+    (ausopen_id, 2024, venue_ausopen, '2024-01-14', '2024-01-28'),
+    (rolandgarros_id, 2024, venue_rolandgarros, '2024-05-26', '2024-06-09'),
+    (wimbledon_id, 2024, venue_wimbledon, '2024-07-01', '2024-07-14'),
+    (usopen_id, 2024, venue_usopen, '2024-08-26', '2024-09-08')
+    ON CONFLICT DO NOTHING;
+END $$;
+
+-- Registrar algunos historiales de entrenadores
+DO $$
+DECLARE
+    nadal_id INTEGER;
+    federer_id INTEGER;
+    djokovic_id INTEGER;
+    serena_id INTEGER;
+    toni_nadal_id INTEGER;
+    moya_id INTEGER;
+    becker_id INTEGER;
+    mouratoglou_id INTEGER;
+BEGIN
+    -- Obtener IDs de jugadores y entrenadores
+    SELECT player_id INTO nadal_id FROM Players WHERE name = 'Rafael Nadal';
+    SELECT player_id INTO federer_id FROM Players WHERE name = 'Roger Federer';
+    SELECT player_id INTO djokovic_id FROM Players WHERE name = 'Novak Djokovic';
+    SELECT player_id INTO serena_id FROM Players WHERE name = 'Serena Williams';
+    
+    SELECT coach_id INTO toni_nadal_id FROM Coaches WHERE name = 'Toni Nadal';
+    SELECT coach_id INTO moya_id FROM Coaches WHERE name = 'Carlos Moyá';
+    SELECT coach_id INTO becker_id FROM Coaches WHERE name = 'Boris Becker';
+    SELECT coach_id INTO mouratoglou_id FROM Coaches WHERE name = 'Patrick Mouratoglou';
+
+    -- Insertar historiales
+    INSERT INTO CoachingHistory (player_id, coach_id, start_date, end_date)
+    VALUES
+    (nadal_id, toni_nadal_id, '1990-01-01', '2017-12-31'),
+    (nadal_id, moya_id, '2017-01-01', NULL),
+    (djokovic_id, becker_id, '2013-12-01', '2016-12-31'),
+    (serena_id, mouratoglou_id, '2012-06-01', '2022-05-31')
+    ON CONFLICT DO NOTHING;
+END $$;
+
+-- Insertar partidos de Grand Slam
+DO $$ 
+DECLARE 
+    -- IDs de ediciones
+    ausopen_2023_id INTEGER;
+    rg_2023_id INTEGER;
+    wimbledon_2023_id INTEGER;
+    usopen_2023_id INTEGER;
+    ausopen_2024_id INTEGER;
+    
+    -- IDs de categorías
+    ind_masc_id INTEGER;
+    ind_fem_id INTEGER;
+    dobles_masc_id INTEGER;
+    dobles_fem_id INTEGER;
+    dobles_mixtos_id INTEGER;
+    
+    -- IDs de jugadores masculinos
+    nadal_id INTEGER;
+    djokovic_id INTEGER;
+    alcaraz_id INTEGER;
+    federer_id INTEGER;
+    murray_id INTEGER;
+    
+    -- IDs de jugadoras femeninas
+    serena_id INTEGER;
+    swiatek_id INTEGER;
+    gauff_id INTEGER;
+    raducanu_id INTEGER;
+    sharapova_id INTEGER;
+    
+    -- IDs de árbitros
+    ramos_id INTEGER;
+    lahyani_id INTEGER;
+    hughes_id INTEGER;
+    keothavong_id INTEGER;
+
+    -- Variable para almacenar el ID del partido
+    nuevo_match_id INTEGER;
+    
+BEGIN
+    -- Obtener IDs de ediciones
+    SELECT edition_id INTO ausopen_2023_id 
+    FROM TournamentEditions te 
+    JOIN Tournaments t ON te.tournament_id = t.tournament_id 
+    WHERE t.name = 'Australian Open' AND te.year = 2023;
+    
+    SELECT edition_id INTO rg_2023_id 
+    FROM TournamentEditions te 
+    JOIN Tournaments t ON te.tournament_id = t.tournament_id 
+    WHERE t.name = 'Roland Garros' AND te.year = 2023;
+    
+    SELECT edition_id INTO wimbledon_2023_id 
+    FROM TournamentEditions te 
+    JOIN Tournaments t ON te.tournament_id = t.tournament_id 
+    WHERE t.name = 'Wimbledon' AND te.year = 2023;
+    
+    SELECT edition_id INTO usopen_2023_id 
+    FROM TournamentEditions te 
+    JOIN Tournaments t ON te.tournament_id = t.tournament_id 
+    WHERE t.name = 'US Open' AND te.year = 2023;
+    
+    SELECT edition_id INTO ausopen_2024_id 
+    FROM TournamentEditions te 
+    JOIN Tournaments t ON te.tournament_id = t.tournament_id 
+    WHERE t.name = 'Australian Open' AND te.year = 2024;
+    
+    -- Obtener IDs de categorías
+    SELECT category_id INTO ind_masc_id FROM Categories WHERE name = 'Individual masculino';
+    SELECT category_id INTO ind_fem_id FROM Categories WHERE name = 'Individual femenino';
+    SELECT category_id INTO dobles_masc_id FROM Categories WHERE name = 'Dobles masculino';
+    SELECT category_id INTO dobles_fem_id FROM Categories WHERE name = 'Dobles femenino';
+    SELECT category_id INTO dobles_mixtos_id FROM Categories WHERE name = 'Dobles mixtos';
+    
+    -- Obtener IDs de jugadores
+    SELECT player_id INTO nadal_id FROM Players WHERE name = 'Rafael Nadal';
+    SELECT player_id INTO djokovic_id FROM Players WHERE name = 'Novak Djokovic';
+    SELECT player_id INTO alcaraz_id FROM Players WHERE name = 'Carlos Alcaraz';
+    SELECT player_id INTO federer_id FROM Players WHERE name = 'Roger Federer';
+    SELECT player_id INTO murray_id FROM Players WHERE name = 'Andy Murray';
+    
+    SELECT player_id INTO serena_id FROM Players WHERE name = 'Serena Williams';
+    SELECT player_id INTO swiatek_id FROM Players WHERE name = 'Iga Świątek';
+    SELECT player_id INTO gauff_id FROM Players WHERE name = 'Coco Gauff';
+    SELECT player_id INTO raducanu_id FROM Players WHERE name = 'Emma Raducanu';
+    SELECT player_id INTO sharapova_id FROM Players WHERE name = 'Maria Sharapova';
+    
+    -- Obtener IDs de árbitros
+    SELECT referee_id INTO ramos_id FROM Referees WHERE name = 'Carlos Ramos';
+    SELECT referee_id INTO lahyani_id FROM Referees WHERE name = 'Mohamed Lahyani';
+    SELECT referee_id INTO hughes_id FROM Referees WHERE name = 'Alison Hughes';
+    SELECT referee_id INTO keothavong_id FROM Referees WHERE name = 'James Keothavong';
+
+    -- Australian Open 2023 - Cuartos de final masculinos
+    INSERT INTO Matches (edition_id, category_id, round, date, referee_id, winner_prize, loser_prize)
+    VALUES (ausopen_2023_id, ind_masc_id, 'Cuartos', '2023-01-24', ramos_id, 25000, 12500)
+    RETURNING match_id INTO nuevo_match_id;
+    
+    INSERT INTO MatchParticipants (match_id, player_id, team_number, is_winner, score)
+    VALUES 
+    (nuevo_match_id, djokovic_id, 1, true, '6-4,7-6,6-2'),
+    (nuevo_match_id, murray_id, 2, false, '6-4,7-6,6-2');
+
+    -- Roland Garros 2023 - Final femenina
+    INSERT INTO Matches (edition_id, category_id, round, date, referee_id, winner_prize, loser_prize)
+    VALUES (rg_2023_id, ind_fem_id, 'Final', '2023-06-10', hughes_id, 100000, 50000)
+    RETURNING match_id INTO nuevo_match_id;
+    
+    INSERT INTO MatchParticipants (match_id, player_id, team_number, is_winner, score)
+    VALUES 
+    (nuevo_match_id, swiatek_id, 1, true, '6-2,5-7,6-4'),
+    (nuevo_match_id, gauff_id, 2, false, '6-2,5-7,6-4');
+
+    -- Wimbledon 2023 - Semifinal masculina
+    INSERT INTO Matches (edition_id, category_id, round, date, referee_id, winner_prize, loser_prize)
+    VALUES (wimbledon_2023_id, ind_masc_id, 'Semifinal', '2023-07-14', lahyani_id, 50000, 25000)
+    RETURNING match_id INTO nuevo_match_id;
+    
+    INSERT INTO MatchParticipants (match_id, player_id, team_number, is_winner, score)
+    VALUES 
+    (nuevo_match_id, alcaraz_id, 1, true, '6-3,6-3,6-3'),
+    (nuevo_match_id, djokovic_id, 2, false, '6-3,6-3,6-3');
+
+    -- US Open 2023 - Final femenina
+    INSERT INTO Matches (edition_id, category_id, round, date, referee_id, winner_prize, loser_prize)
+    VALUES (usopen_2023_id, ind_fem_id, 'Final', '2023-09-09', hughes_id, 100000, 50000)
+    RETURNING match_id INTO nuevo_match_id;
+    
+    INSERT INTO MatchParticipants (match_id, player_id, team_number, is_winner, score)
+    VALUES 
+    (nuevo_match_id, gauff_id, 1, true, '2-6,6-3,6-2'),
+    (nuevo_match_id, swiatek_id, 2, false, '2-6,6-3,6-2');
+
+    -- Australian Open 2024 - Octavos masculinos
+    INSERT INTO Matches (edition_id, category_id, round, date, referee_id, winner_prize, loser_prize)
+    VALUES (ausopen_2024_id, ind_masc_id, 'Octavos', '2024-01-22', keothavong_id, 12500, 6250)
+    RETURNING match_id INTO nuevo_match_id;
+    
+    INSERT INTO MatchParticipants (match_id, player_id, team_number, is_winner, score)
+    VALUES 
+    (nuevo_match_id, alcaraz_id, 1, true, '7-6,6-3,6-4'),
+    (nuevo_match_id, murray_id, 2, false, '7-6,6-3,6-4');
+
+    -- Dobles mixtos Australian Open 2024
+    INSERT INTO Matches (edition_id, category_id, round, date, referee_id, winner_prize, loser_prize)
+    VALUES (ausopen_2024_id, dobles_mixtos_id, 'Cuartos', '2024-01-23', ramos_id, 25000, 12500)
+    RETURNING match_id INTO nuevo_match_id;
+    
+    INSERT INTO MatchParticipants (match_id, player_id, team_number, is_winner, score)
+    VALUES 
+    (nuevo_match_id, murray_id, 1, true, '6-4,7-5'),
+    (nuevo_match_id, raducanu_id, 1, true, '6-4,7-5'),
+    (nuevo_match_id, alcaraz_id, 2, false, '6-4,7-5'),
+    (nuevo_match_id, gauff_id, 2, false, '6-4,7-5');
+
+END $$;

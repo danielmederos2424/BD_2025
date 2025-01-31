@@ -1,0 +1,35 @@
+-- Compañías discográficas
+INSERT INTO Companies (name, address) VALUES
+('Deutsche Grammophon', 'Podbielskiallee 64, 14195 Berlin, Germany'),
+('Blue Note Records', '1750 N. Vine Street, Los Angeles, CA 90028'),
+('ECM Records', 'Kolberger Straße 22, 81679 München, Germany');
+
+-- Grabaciones
+INSERT INTO Recordings (title, musical_category, track_count, description, company_id) VALUES
+('Kind of Blue', 'Jazz', 5, 'Álbum revolucionario de Miles Davis que definió el jazz modal', 2),
+('The Köln Concert', 'Jazz', 4, 'Legendaria grabación en vivo de Keith Jarrett', 3),
+('Symphony No. 9', 'Clásica', 4, 'Interpretación de la Novena Sinfonía de Beethoven por Herbert von Karajan', 1);
+
+-- Intérpretes
+INSERT INTO Performers (name, biography) VALUES
+('Miles Davis', 'Innovador trompetista y compositor de jazz, pionero en varios estilos incluyendo el cool jazz y jazz fusion'),
+('Keith Jarrett', 'Pianista virtuoso conocido por sus improvisaciones en solitario y su trabajo en jazz y música clásica'),
+('Berliner Philharmoniker', 'Una de las orquestas más prestigiosas del mundo, fundada en 1882');
+
+-- Participaciones
+INSERT INTO Performances (recording_id, performer_id, participation_date) VALUES
+(1, 1, '1959-03-02'),
+(2, 2, '1975-01-24'),
+(3, 3, '1963-02-15');
+
+-- Formatos
+INSERT INTO Formats (name) VALUES
+('CD'),
+('Vinilo 180g'),
+('SACD');
+
+-- Copias físicas
+INSERT INTO PhysicalCopies (recording_id, format_id, conservation_state) VALUES
+(1, 2, 'bueno'),    -- Kind of Blue en vinilo
+(2, 1, 'regular'),  -- Köln Concert en CD
+(3, 3, 'bueno');    -- Sinfonía en SACD

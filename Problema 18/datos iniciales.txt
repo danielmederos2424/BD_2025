@@ -1,0 +1,103 @@
+-- Insertar Clientes
+INSERT INTO Clientes (numero_documento, nombre, apellidos) VALUES
+('98765432109', 'Juan', 'Pérez García'),
+('12345678901', 'María', 'Rodríguez López'),
+('56789012345', 'Carlos', 'González Martínez'),
+('34567890123', 'Ana', 'Fernández Díaz'),
+('89012345678', 'Pedro', 'Sánchez Ruiz');
+
+-- Insertar Teléfonos (múltiples por cliente)
+INSERT INTO Telefonos (cliente_id, numero) VALUES
+(1, '55123456'),
+(1, '55789012'),
+(2, '55234567'),
+(2, '55890123'),
+(3, '55345678'),
+(3, '55901234'),
+(4, '55456789'),
+(5, '55567890'),
+(5, '55012345'),
+(5, '55678901');
+
+-- Insertar Proveedores
+INSERT INTO Proveedores (nombre, domicilio, dias_entrega) VALUES
+('FrutaCuba', 'Calle 23 #123, La Habana', '{"Lunes","Miércoles","Viernes"}'),
+('VerdeFresco', 'Avenida 5ta #456, Santiago', '{"Martes","Jueves","Sábado"}'),
+('TropicalFresh', 'Calle Central #789, Holguín', '{"Lunes","Jueves"}'),
+('AgrícolaSur', 'Carretera Norte #234, Cienfuegos', '{"Miércoles","Sábado"}'),
+('ImportFruit', 'Vía Principal #567, Matanzas', '{"Martes","Viernes"}');
+
+-- Insertar Productos (múltiples por proveedor)
+INSERT INTO Productos (nombre, precio_kg, proveedor_id) VALUES
+('Manzana Verde', 25.50, 1),
+('Plátano Fruta', 15.75, 1),
+('Naranja', 18.90, 1),
+('Manzana Verde', 26.00, 2),
+('Guayaba', 12.50, 2),
+('Piña', 22.75, 2),
+('Mango', 20.00, 3),
+('Papaya', 16.80, 3),
+('Limón', 14.90, 4),
+('Toronja', 13.25, 4),
+('Mandarina', 19.50, 5),
+('Pera', 28.75, 5);
+
+-- Insertar Cajones
+INSERT INTO Cajones (nombre, descripcion) VALUES
+('Tropical Mix', 'Selección de frutas tropicales frescas'),
+('Cítricos Premium', 'Mezcla de cítricos de primera calidad'),
+('Dulzura Natural', 'Combinación de frutas dulces'),
+('Frutas Frescas', 'Variedades de frutas de temporada'),
+('Mix Económico', 'Selección variada a precio accesible');
+
+-- Insertar Productos_Cajon
+INSERT INTO Productos_Cajon (cajon_id, producto_id, cantidad_kg) VALUES
+(1, 2, 2.5),  -- Plátano en Tropical Mix
+(1, 7, 2.0),  -- Mango en Tropical Mix
+(1, 8, 2.0),  -- Papaya en Tropical Mix
+(2, 3, 2.0),  -- Naranja en Cítricos Premium
+(2, 9, 1.5),  -- Limón en Cítricos Premium
+(2, 10, 2.0), -- Toronja en Cítricos Premium
+(2, 11, 1.5), -- Mandarina en Cítricos Premium
+(3, 1, 2.0),  -- Manzana Verde en Dulzura Natural
+(3, 5, 2.0),  -- Guayaba en Dulzura Natural
+(3, 12, 1.5), -- Pera en Dulzura Natural
+(4, 4, 2.0),  -- Manzana Verde (otro proveedor) en Frutas Frescas
+(4, 6, 2.0),  -- Piña en Frutas Frescas
+(4, 7, 1.5),  -- Mango en Frutas Frescas
+(5, 2, 3.0),  -- Plátano en Mix Económico
+(5, 5, 2.0),  -- Guayaba en Mix Económico
+(5, 8, 2.0);  -- Papaya en Mix Económico
+
+-- Insertar Pedidos
+INSERT INTO Pedidos (cliente_id, fecha_pedido, fecha_entrega, forma_pago) VALUES
+(1, '2025-01-25', '2025-01-26', 'efectivo'),
+(2, '2025-01-25', '2025-01-27', 'transferencia'),
+(3, '2025-01-26', '2025-01-28', 'efectivo'),
+(4, '2025-01-26', '2025-01-27', 'transferencia'),
+(5, '2025-01-27', '2025-01-29', 'efectivo'),
+(1, '2025-01-27', '2025-01-30', 'transferencia'),
+(2, '2025-01-27', '2025-01-29', 'efectivo'),
+(3, '2025-01-28', '2025-01-31', 'transferencia');
+
+-- Insertar Pedidos_Cajones
+INSERT INTO Pedidos_Cajones (pedido_id, cajon_id) VALUES
+(1, 1),
+(1, 2),
+(2, 3),
+(3, 1),
+(3, 4),
+(4, 2),
+(5, 5),
+(6, 3),
+(6, 4),
+(7, 1),
+(8, 2),
+(8, 5);
+
+-- Insertar Detalle_Pago (solo para pedidos con transferencia)
+INSERT INTO Detalle_Pago (pedido_id, cuenta_origen) VALUES
+(2, '1234-5678-9012-3456'),
+(4, '9876-5432-1098-7654'),
+(6, '4567-8901-2345-6789'),
+(8, '8901-2345-6789-0123');

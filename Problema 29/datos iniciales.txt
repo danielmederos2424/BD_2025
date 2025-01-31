@@ -1,0 +1,55 @@
+-- Insertar Clientes
+INSERT INTO Clientes (dni, nombre, apellidos, direccion, telefono) VALUES
+('12345678A', 'Juan', 'Pérez García', 'Calle Mayor 1, Madrid', '612345678'),
+('23456789B', 'Ana', 'López Martínez', 'Avenida Libertad 23, Barcelona', '623456789'),
+('34567890C', 'Carlos', 'González Ruiz', 'Plaza España 4, Valencia', '634567890'),
+('45678901D', 'María', 'Sánchez Romero', 'Calle Real 15, Sevilla', '645678901'),
+('56789012E', 'Pedro', 'Martín Jiménez', 'Paseo Castellana 67, Madrid', '656789012');
+
+-- Insertar Vehículos
+INSERT INTO Vehiculos (matricula, modelo, color, dni_cliente) VALUES
+('1234ABC', 'Seat León', 'Rojo', '12345678A'),
+('2345BCD', 'Volkswagen Golf', 'Azul', '23456789B'),
+('3456CDE', 'Ford Focus', 'Negro', '34567890C'),
+('4567DEF', 'Renault Clio', 'Blanco', '45678901D'),
+('5678EFG', 'Peugeot 308', 'Gris', '56789012E');
+
+-- Insertar Mecánicos
+INSERT INTO Mecanicos (nombre, apellidos, disponible) VALUES
+('Miguel', 'Fernández López', true),
+('Laura', 'García Moreno', true),
+('Roberto', 'Torres Navarro', true),
+('Carmen', 'Díaz Serrano', true),
+('Javier', 'Ruiz Ortega', true);
+
+-- Insertar Repuestos
+INSERT INTO Repuestos (nombre, precio_unidad) VALUES
+('Filtro de aceite', 15.50),
+('Pastillas de freno', 45.75),
+('Batería', 89.99),
+('Amortiguador', 125.50),
+('Correa de distribución', 65.25);
+
+-- Insertar Reparaciones
+INSERT INTO Reparaciones (matricula_vehiculo, fecha_entrada, hora_entrada, mecanico_principal, mano_obra, estado) VALUES
+('1234ABC', '2024-01-15', '09:00:00', 1, 150.00, 'Finalizada'),
+('2345BCD', '2024-01-20', '10:30:00', 2, 200.00, 'En progreso'),
+('3456CDE', '2024-01-25', '11:45:00', 3, 175.50, 'En evaluación'),
+('4567DEF', '2024-01-30', '14:15:00', 4, 225.75, 'Finalizada'),
+('5678EFG', '2024-02-01', '16:00:00', 5, 180.25, 'En progreso');
+
+-- Insertar Mecanicos_Reparacion (mecánicos adicionales en reparaciones)
+INSERT INTO Mecanicos_Reparacion (id_reparacion, id_mecanico) VALUES
+(1, 2),
+(1, 3),
+(2, 4),
+(3, 5),
+(4, 1);
+
+-- Insertar Repuestos_Reparacion
+INSERT INTO Repuestos_Reparacion (id_reparacion, id_repuesto, cantidad) VALUES
+(1, 1, 1), -- Filtro de aceite para reparación 1
+(1, 2, 2), -- Pastillas de freno para reparación 1
+(2, 3, 1), -- Batería para reparación 2
+(3, 4, 2), -- Amortiguadores para reparación 3
+(4, 5, 1); -- Correa de distribución para reparación 4

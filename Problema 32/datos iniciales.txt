@@ -1,0 +1,63 @@
+-- Insertar directores
+INSERT INTO Directors (name, nationality) VALUES
+('Steven Spielberg', 'Estados Unidos'),
+('Pedro Almodóvar', 'España'),
+('Akira Kurosawa', 'Japón'),
+('Sofia Coppola', 'Estados Unidos'),
+('Wong Kar-wai', 'China');
+
+-- Insertar películas
+INSERT INTO Movies (title, nationality, production_company, release_year) VALUES
+('E.T. el Extraterrestre', 'Estados Unidos', 'Universal Pictures', 1982),
+('Todo sobre mi madre', 'España', 'El Deseo', 1999),
+('Rashomon', 'Japón', 'Daiei Film', 1950),
+('Lost in Translation', 'Estados Unidos', 'American Zoetrope', 2003),
+('In the Mood for Love', 'China', 'Jet Tone Films', 2000);
+
+-- Asociar directores con películas
+INSERT INTO Movies_Directors (movie_id, director_id) VALUES
+(1, 1), -- E.T. - Spielberg
+(2, 2), -- Todo sobre mi madre - Almodóvar
+(3, 3), -- Rashomon - Kurosawa
+(4, 4), -- Lost in Translation - Coppola
+(5, 5); -- In the Mood for Love - Wong Kar-wai
+
+-- Insertar actores
+INSERT INTO Actors (name, nationality, gender) VALUES
+('Henry Thomas', 'Estados Unidos', 'Masculino'),
+('Drew Barrymore', 'Estados Unidos', 'Femenino'),
+('Cecilia Roth', 'Argentina', 'Femenina'),
+('Penélope Cruz', 'España', 'Femenina'),
+('Toshiro Mifune', 'Japón', 'Masculino');
+
+-- Asociar actores con películas
+INSERT INTO Movies_Actors (movie_id, actor_id, is_main_actor) VALUES
+(1, 1, true),  -- Henry Thomas en E.T.
+(1, 2, true),  -- Drew Barrymore en E.T.
+(2, 3, true),  -- Cecilia Roth en Todo sobre mi madre
+(2, 4, false), -- Penélope Cruz en Todo sobre mi madre
+(3, 5, true);  -- Toshiro Mifune en Rashomon
+
+-- Insertar ejemplares de películas
+INSERT INTO MovieCopies (movie_id, conservation_state) VALUES
+(1, 'Excelente'),
+(1, 'Bueno'),
+(2, 'Regular'),
+(3, 'Excelente'),
+(4, 'Bueno');
+
+-- Insertar socios
+INSERT INTO Members (dni, name, address, phone, sponsor_id) VALUES
+('12345678901', 'Juan Pérez', 'Calle 23 #456, La Habana', '52345678', NULL),
+('23456789012', 'María Rodríguez', 'Avenida 3ra #789, Santiago', '55678901', 1),
+('34567890123', 'Carlos Gómez', 'Calle 17 #234, Holguín', '53456789', 1),
+('45678901234', 'Ana Martínez', 'Paseo del Prado #12, La Habana', '52789012', 2),
+('56789012345', 'Roberto Fernández', 'Calle G #567, La Habana', '52234567', 2);
+
+-- Insertar alquileres
+INSERT INTO Rentals (copy_id, member_id, rental_start_date, rental_end_date) VALUES
+(1, 1, '2024-01-15', NULL),
+(2, 2, '2024-01-10', '2024-01-20'),
+(3, 3, '2024-01-05', NULL),
+(4, 4, '2024-01-12', NULL),
+(5, 5, '2024-01-08', '2024-01-25');

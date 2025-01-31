@@ -1,0 +1,72 @@
+-- Insertar registros en la tabla Maderas
+INSERT INTO Maderas (nombre, dureza) VALUES
+('Cedro', 'Blanda'),
+('Caoba', 'Semidura'),
+('Roble', 'Dura'),
+('Pino', 'Blanda'),
+('Guayacán', 'Muy Dura');
+
+-- Insertar registros en la tabla ProveedoresMadera
+INSERT INTO ProveedoresMadera (nombre, telefono) VALUES
+('Maderas La Habana', '78345678'),
+('Aserradero Santiago', '78123456'),
+('Maderera Holguín', '78901234'),
+('Proveedora Camagüey', '78567890'),
+('Forestal Cienfuegos', '78234567');
+
+-- Insertar registros en la tabla Maderas_Proveedores
+INSERT INTO Maderas_Proveedores (madera_id, proveedor_id) VALUES
+(1, 1), -- Cedro - Maderas La Habana
+(2, 2), -- Caoba - Aserradero Santiago
+(3, 3), -- Roble - Maderera Holguín
+(4, 4), -- Pino - Proveedora Camagüey
+(5, 5); -- Guayacán - Forestal Cienfuegos
+
+-- Insertar registros en la tabla Muebles
+INSERT INTO Muebles (nombre, precio, tiene_promo, alto, ancho, profundidad) VALUES
+('Mesa Comedor', 15000.00, TRUE, 80.00, 120.00, 80.00),
+('Silla de Comedor', 2500.00, FALSE, 90.00, 45.00, 45.00),
+('Ropero 3 Puertas', 20000.00, TRUE, 200.00, 150.00, 60.00),
+('Cama Matrimonial', 18000.00, FALSE, 100.00, 200.00, 180.00),
+('Escritorio Oficina', 12000.00, TRUE, 75.00, 150.00, 60.00);
+
+-- Insertar registros en la tabla Muebles_Maderas
+INSERT INTO Muebles_Maderas (mueble_id, madera_id) VALUES
+(1, 2), -- Mesa Comedor - Caoba
+(2, 4), -- Silla de Comedor - Pino
+(3, 1), -- Ropero 3 Puertas - Cedro
+(4, 3), -- Cama Matrimonial - Roble
+(5, 5); -- Escritorio Oficina - Guayacán
+
+-- Insertar registros en la tabla CombinacionesMuebles
+INSERT INTO CombinacionesMuebles (mueble_principal_id, mueble_secundario_id, cantidad_sugerida) VALUES
+(1, 2, 6), -- Mesa Comedor con 6 Sillas de Comedor
+(4, 5, 2), -- Cama Matrimonial con 2 Mesitas de Luz
+(3, 4, 1), -- Ropero 3 Puertas con 1 Cama Matrimonial
+(5, 1, 1), -- Escritorio Oficina con 1 Mesa Comedor
+(2, 3, 1); -- Silla de Comedor con 1 Ropero 3 Puertas
+
+-- Insertar registros en la tabla Clientes
+INSERT INTO Clientes (nombre, telefono) VALUES
+('Juan Pérez García', '55123456'),
+('María López Rodríguez', '55678901'),
+('Carlos Fernández Díaz', '55234567'),
+('Ana Martínez Sánchez', '55890123'),
+('Luis González Torres', '55345678');
+
+-- Insertar registros en la tabla OrdenesCompra
+INSERT INTO OrdenesCompra (cliente_id, fecha, fecha_entrega, calle, localidad, provincia) VALUES
+(1, '2024-01-10', '2024-01-20', 'Calle 23 #123', 'Vedado', 'La Habana'),
+(2, '2024-01-12', '2024-01-22', 'Avenida Libertad #45', 'Santiago de Cuba', 'Santiago de Cuba'),
+(3, '2024-01-15', '2024-01-25', 'Calle Martí #789', 'Camagüey', 'Camagüey'),
+(4, '2024-01-18', '2024-01-28', 'Calle Larga #321', 'Santa Clara', 'Villa Clara'),
+(5, '2024-01-20', '2024-01-30', 'Calle Principal #987', 'Cienfuegos', 'Cienfuegos');
+
+-- Insertar registros en la tabla DetalleOrden
+INSERT INTO DetalleOrden (orden_id, mueble_id, cantidad) VALUES
+(1, 1, 1), -- Orden 1: 1 Mesa Comedor
+(1, 2, 6), -- Orden 1: 6 Sillas de Comedor
+(2, 4, 1), -- Orden 2: 1 Cama Matrimonial
+(3, 3, 1), -- Orden 3: 1 Ropero 3 Puertas
+(4, 5, 1), -- Orden 4: 1 Escritorio Oficina
+(5, 2, 4); -- Orden 5: 4 Sillas de Comedor

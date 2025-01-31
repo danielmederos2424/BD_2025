@@ -1,0 +1,32 @@
+-- Datos de ejemplo
+INSERT INTO Oficinas (Nombre, Direccion, Telefono) VALUES
+('Oficina Central', 'Plaza Mayor 1', '964111222'),
+('Oficina Norte', 'Av. Valencia 45', '964222333');
+
+INSERT INTO Inmuebles (Ref, Tipo, Superficie, Direccion, Zona, PrecioVenta, PrecioAlquiler, 
+                     Propietario, TelefonoPropietario, OficinaID, TieneLlaves) VALUES
+(1234, 'Piso de ocasión', 90, 'C/Lérida 24', 'Capuchinos', 14000000, NULL, 
+'Luis Herranz', '964223344', 1, true),
+(9876, 'Villa', 140, 'Urb. Las Palmas 8A', 'Benicasim', NULL, NULL, 
+'Carmela Aparicio', '964221144', 2, false),
+(5678, 'Local', 40, 'C/Ricardo Catalá 12', 'Avd. Valencia', 6000000, 50000, 
+'Luis Herranz', '964223344', 1, true),
+(3456, 'Casa', 104, 'Ctra. Alcora 43', 'El Pantano', 8000000, NULL, 
+'Gemma López', '96 3456789', 2, false);
+
+INSERT INTO CaracteristicasVivienda (Ref, NumHabitaciones, NumBanos, NumAseos, NumCocinas,
+                                   TieneGasCiudad, TienePuertaBlindada, TieneParquet) VALUES
+(1234, 3, 1, 0, 1, false, true, true),
+(9876, 7, 3, 0, 1, true, false, false),
+(3456, 3, 1, 0, 1, false, false, false);
+
+INSERT INTO CaracteristicasLocal (Ref, Diafano, NumPuertas, TieneAireAcondicionado, SuperficieAltillo) VALUES
+(5678, true, 1, false, 10);
+
+INSERT INTO Visitas (RefInmueble, FechaHora, Cliente, Comentario) VALUES
+(1234, '2001-12-20 19:00', 'Marcela Torres', 'baño peq., piso alto'),
+(1234, '2001-01-21 12:00', 'Carlos Jara', NULL),
+(9876, '2001-05-22 09:30', 'Antonio Ruiz', 'interesado'),
+(3456, '2001-01-13 17:00', 'Felipe Ulloa', 'no es lo que busca'),
+(3456, '2001-05-05 17:30', 'Carmen Fez', 'le gusta'),
+(3456, '2001-05-23 19:45', 'Carmen Fez', 'buscará financiación');

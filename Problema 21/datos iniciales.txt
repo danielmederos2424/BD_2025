@@ -1,0 +1,174 @@
+-- Insertar Equipos (32 equipos participantes)
+INSERT INTO Equipos (pais, sede_hospedaje, mundiales_ganados, director_tecnico) VALUES 
+('Brasil', 'Hotel Portinari, Belo Horizonte', 5, 'Luiz Felipe Scolari'),
+('Alemania', 'Hotel Intercontinental, Baixada Fluminense', 4, 'Joachim Löw'),
+('Argentina', 'Hotel Fasano, Rio de Janeiro', 2, 'Alejandro Sabella'),
+('Países Bajos', 'Sheraton São Paulo WTC Hotel', 0, 'Louis van Gaal'),
+('Colombia', 'Hotel Windsor Marapendi', 0, 'José Pekerman'),
+('Costa Rica', 'Hotel Pestana, Rio de Janeiro', 0, 'Jorge Luis Pinto'),
+('Chile', 'Hotel Caesar Park, Rio de Janeiro', 0, 'Jorge Sampaoli'),
+('Uruguay', 'Hotel Méridien, Rio de Janeiro', 2, 'Óscar Tabárez'),
+('España', 'Hotel Unique, São Paulo', 1, 'Vicente del Bosque'),
+('Italia', 'Hotel Transamérica, São Paulo', 4, 'Cesare Prandelli'),
+('Inglaterra', 'Hotel Royal Tulip, Rio de Janeiro', 1, 'Roy Hodgson'),
+('Suiza', 'Hotel Copacabana Palace', 0, 'Ottmar Hitzfeld'),
+('Bélgica', 'Hotel Windsor Marapendi', 0, 'Marc Wilmots'),
+('Francia', 'Hotel Sofitel, Rio de Janeiro', 2, 'Didier Deschamps'),
+('Portugal', 'Hotel Caesar Park, Rio de Janeiro', 0, 'Paulo Bento'),
+('Grecia', 'Hotel Windsor Marapendi', 0, 'Fernando Santos'),
+('México', 'Hotel JW Marriott, Rio de Janeiro', 0, 'Miguel Herrera'),
+('Estados Unidos', 'Hotel Copacabana Palace', 0, 'Jürgen Klinsmann'),
+('Ecuador', 'Hotel Sheraton', 0, 'Reinaldo Rueda'),
+('Honduras', 'Hotel Windsor Marapendi', 0, 'Luis Fernando Suárez'),
+('Argelia', 'Hotel Transamérica', 0, 'Vahid Halilhodžić'),
+('Nigeria', 'Hotel Copacabana Palace', 0, 'Stephen Keshi'),
+('Ghana', 'Hotel Sheraton', 0, 'Kwesi Appiah'),
+('Camerún', 'Hotel Windsor Marapendi', 0, 'Volker Finke'),
+('Corea del Sur', 'Hotel Caesar Park', 0, 'Hong Myung-bo'),
+('Japón', 'Hotel Unique', 0, 'Alberto Zaccheroni'),
+('Australia', 'Hotel Copacabana Palace', 0, 'Ange Postecoglou'),
+('Irán', 'Hotel Sheraton', 0, 'Carlos Queiroz'),
+('Bosnia y Herzegovina', 'Hotel Windsor Marapendi', 0, 'Safet Sušić'),
+('Rusia', 'Hotel Fasano', 0, 'Fabio Capello'),
+('Croacia', 'Hotel Caesar Park', 0, 'Niko Kovač');
+
+-- Insertar Estadios
+INSERT INTO Estadios (nombre) VALUES 
+('Estadio Maracaná, Rio de Janeiro'),
+('Estadio Mineirao, Belo Horizonte'),
+('Estadio Castelão, Fortaleza'),
+('Estadio Nacional de Brasilia'),
+('Arena Fonte Nova, Salvador'),
+('Arena Pantanal, Cuiabá'),
+('Arena das Dunas, Natal'),
+('Arena Pernambuco, Recife'),
+('Estadio Beira-Rio, Porto Alegre'),
+('Arena Corinthians, São Paulo');
+
+-- Insertar Hinchas
+INSERT INTO Hinchas (nombre, dni, domicilio, nacionalidad, invitado_por) VALUES 
+('Carlos Rodríguez', 'ARG123456', 'Av. Corrientes 1234, Buenos Aires', 'Argentina', NULL),
+('María González', 'BRA789012', 'Rua Copacabana 567, Rio de Janeiro', 'Brasil', NULL),
+('Juan Pérez', 'COL345678', 'Calle 80 #12-34, Bogotá', 'Colombia', 1),
+('Ana Silva', 'URU901234', 'Av. Brasil 2345, Montevideo', 'Uruguay', 2),
+('Pedro Martínez', 'ESP567890', 'Paseo de la Castellana 123, Madrid', 'España', NULL),
+('Luisa Santos', 'POR234567', 'Rua Augusta 456, Lisboa', 'Portugal', 5),
+('Miguel Fernández', 'MEX890123', 'Av. Reforma 789, Ciudad de México', 'México', NULL),
+('Sofia Oliveira', 'POR456789', 'Praça do Comércio 234, Porto', 'Portugal', 7),
+('Ricardo Almeida', 'BRA567890', 'Av. Paulista 1000, São Paulo', 'Brasil', 1),
+('Gabriela Costa', 'ARG234567', 'Calle Florida 567, Buenos Aires', 'Argentina', 9),
+('Lukas Schmidt', 'ALE987654', 'Frankfurter Straße 42, Frankfurt', 'Alemania', NULL),
+('Emma Nielsen', 'HOL345678', 'Amsterdamseweg 89, Ámsterdam', 'Países Bajos', NULL),
+('Diego Sánchez', 'CHI567890', 'Av. Providencia 1234, Santiago', 'Chile', 1),
+('Isabella Rossi', 'ITA234567', 'Via Roma 567, Roma', 'Italia', NULL),
+('Thomas Mueller', 'ALE345678', 'Münchner Freiheit 23, Múnich', 'Alemania', 11);
+
+-- Insertar Hoteles
+INSERT INTO Hoteles (hotel_id, nombre, direccion, estrellas) VALUES 
+('RIO001', 'Copacabana Palace', 'Av. Atlântica 1702, Copacabana', 5),
+('RIO002', 'Sheraton Rio Hotel', 'Av. Niemeyer 121, Leblon', 5),
+('RIO003', 'Windsor Marapendi Hotel', 'Av. Lucio Costa 5490, Barra da Tijuca', 4),
+('RIO004', 'Caesar Park Hotel', 'Av. Vieira Souto 460, Ipanema', 5),
+('RIO005', 'JW Marriott Hotel', 'Av. Atlântica 2600, Copacabana', 5),
+('RIO006', 'Fasano Hotel', 'Av. Vieira Souto 80, Ipanema', 5),
+('RIO007', 'Sofitel Rio', 'Av. Atlântica 4240, Copacabana', 5),
+('RIO008', 'Hilton Copacabana', 'Av. Princesa Isabel 130, Copacabana', 5);
+
+-- Insertar Hospedaje
+INSERT INTO Hospedaje (hincha_id, hotel_id) VALUES 
+(1, 'RIO001'),
+(2, 'RIO002'),
+(3, 'RIO003'),
+(4, 'RIO004'),
+(5, 'RIO005'),
+(6, 'RIO006'),
+(7, 'RIO007'),
+(8, 'RIO008'),
+(9, 'RIO001'),
+(10, 'RIO002');
+
+-- Insertar Partidos
+INSERT INTO Partidos (fecha, estadio_id, espectadores, equipo1_id, equipo2_id, etapa) VALUES 
+('2014-06-12', 1, 73831, 31, 1, 'Grupos'),   -- Brasil vs Croacia
+('2014-06-13', 10, 62103, 2, 15, 'Grupos'),  -- Alemania vs Portugal
+('2014-06-15', 3, 67207, 16, 17, 'Grupos'),  -- México vs Camerún
+('2014-06-18', 4, 68891, 3, 20, 'Grupos'),   -- Argentina vs Irán
+('2014-06-23', 5, 55197, 2, 22, 'Grupos'),   -- Alemania vs Ghana
+('2014-06-28', 9, 42374, 7, 6, 'Octavos'),   -- Chile vs Brasil
+('2014-06-29', 8, 44154, 3, 16, 'Octavos'),  -- Argentina vs Suiza
+('2014-07-04', 6, 48633, 2, 14, 'Cuartos'),  -- Alemania vs Francia
+('2014-07-05', 9, 56294, 3, 5, 'Cuartos'),   -- Argentina vs Bélgica
+('2014-07-08', 1, 74240, 2, 1, 'Semifinal'), -- Alemania vs Brasil
+('2014-07-09', 2, 58141, 3, 4, 'Semifinal'), -- Argentina vs Países Bajos
+('2014-07-13', 1, 74738, 2, 3, 'Final');     -- Alemania vs Argentina
+
+-- Insertar Árbitros
+INSERT INTO Arbitros (nombre) VALUES 
+('Nicola Rizzoli, Italia'),
+('Howard Webb, Inglaterra'),
+('Björn Kuipers, Países Bajos'),
+('Sandro Ricci, Brasil'),
+('Mark Geiger, Estados Unidos'),
+('Ravshan Irmatov, Uzbekistán'),
+('Carlos Velasco Carballo, España'),
+('Felix Brych, Alemania');
+
+-- Insertar Árbitros por Partido
+INSERT INTO ArbitrosPartidos (partido_id, arbitro_id) VALUES 
+(1, 1), (2, 3), (3, 4), (4, 5), (5, 6), 
+(6, 7), (7, 8), (8, 1), (9, 3), (10, 4), 
+(11, 5), (12, 2);
+
+-- Insertar Fun Fests
+INSERT INTO FunFests (funfest_id, ciudad, duracion, partido_id) VALUES 
+('FF001', 'Rio de Janeiro', '05:00:00', 1),
+('FF002', 'São Paulo', '04:30:00', 2),
+('FF003', 'Salvador', '06:00:00', 3),
+('FF004', 'Belo Horizonte', '05:30:00', 4),
+('FF005', 'Brasilia', '04:45:00', 5),
+('FF006', 'Porto Alegre', '05:15:00', 6),
+('FF007', 'Recife', '05:00:00', 7),
+('FF008', 'Cuiabá', '04:30:00', 8),
+('FF009', 'Natal', '05:30:00', 9),
+('FF010', 'Rio de Janeiro', '06:00:00', 10),
+('FF011', 'Belo Horizonte', '05:00:00', 11),
+('FF012', 'Rio de Janeiro', '05:45:00', 12);
+
+-- Insertar Packs de Cotillón
+INSERT INTO PacksCotillon (nombre, elementos) VALUES 
+('Pack Vuvuzelas', ARRAY['Vuvuzela', 'Bandera Brasil', 'Gorra de la selección']),
+('Pack Animación', ARRAY['Corneta', 'Pelota miniatura', 'Pintura facial']),
+('Pack Recuerdo Mundial', ARRAY['Llavero oficial', 'Bufanda', 'Parche conmemorativo']),
+('Pack Celebración', ARRAY['Trompeta', 'Bandera de equipo', 'Confeti']),
+('Pack Fanático', ARRAY['Camiseta selección', 'Bandera', 'Gafas de sol']);
+
+-- Insertar Packs de Hinchas
+INSERT INTO PacksHinchas (hincha_id, pack_id) VALUES 
+(1, 1), (1, 2),
+(2, 3), (2, 4),
+(3, 5), (3, 1),
+(4, 2), (4, 3),
+(5, 4), (5, 5),
+(6, 1), (6, 3),
+(7, 2), (7, 4),
+(8, 5), (8, 1),
+(9, 3), (9, 5),
+(10, 4), (10, 2);
+
+-- Insertar Consumo de Cerveza
+INSERT INTO ConsumoCerveza (hincha_id, partido_id, cantidad_cervezas) VALUES 
+(1, 1, 4),
+(2, 2, 6),
+(3, 3, 3),
+(4, 4, 5),
+(5, 5, 2),
+(6, 6, 7),
+(7, 7, 4),
+(8, 8, 5),
+(9, 9, 6),
+(10, 10, 3),
+(11, 11, 5),
+(12, 12, 4),
+(13, 1, 5),
+(14, 2, 3),
+(15, 3, 6);
