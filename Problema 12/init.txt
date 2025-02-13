@@ -5,7 +5,7 @@ INSERT INTO Oficinas (Nombre, Direccion, Telefono) VALUES
 
 INSERT INTO Inmuebles (Ref, Tipo, Superficie, Direccion, Zona, PrecioVenta, PrecioAlquiler, 
                      Propietario, TelefonoPropietario, OficinaID, TieneLlaves) VALUES
-(1234, 'Piso de ocasión', 90, 'C/Lérida 24', 'Capuchinos', 14000000, NULL, 
+(1234, 'Piso', 90, 'C/Lérida 24', 'Capuchinos', 14000000, NULL, 
 'Luis Herranz', '964223344', 1, true),
 (9876, 'Villa', 140, 'Urb. Las Palmas 8A', 'Benicasim', NULL, NULL, 
 'Carmela Aparicio', '964221144', 2, false),

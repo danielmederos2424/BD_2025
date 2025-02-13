@@ -1,0 +1,47 @@
+-- Empresas de medios
+INSERT INTO EmpresasMedios VALUES
+('A12345678', 'Media Corp', 'Juan Pérez', 'Calle 1 #123'),
+('B12345678', 'Radio Holdings', 'Ana García', 'Avenida 2 #456'), 
+('C12345678', 'Broadcast SA', 'Carlos López', 'Plaza 3 #789');
+
+-- Emisoras 
+INSERT INTO Emisoras VALUES
+('D12345678', 'Radio Uno', 'Calle 4 #321', 'Pedro Ruiz', 89.1, 'Madrid'),
+('E12345678', 'Radio Dos', 'Avenida 5 #654', 'María Torres', 95.5, 'Barcelona'),
+('F12345678', 'Radio Tres', 'Plaza 6 #987', 'José Sanz', 102.3, 'Valencia');
+
+-- Cadenas Radio
+INSERT INTO CadenasRadio VALUES
+(DEFAULT, 'Cadena Nacional', 'Roberto Gil', 'D12345678', 'A12345678'),
+(DEFAULT, 'Cadena Regional', 'Laura Vega', 'E12345678', 'B12345678'),
+(DEFAULT, 'Cadena Local', 'Daniel Mora', 'F12345678', 'C12345678');
+
+-- Emisoras_Cadena
+INSERT INTO EmisorasCadena VALUES
+(1, 'D12345678'),
+(2, 'E12345678'),
+(3, 'F12345678');
+
+-- Programas
+INSERT INTO Programas VALUES
+(DEFAULT, 'Mañanas Felices', 'Miguel Ángel', 50.00, 1, NULL),
+(DEFAULT, 'Tardes de Radio', 'Patricia Ruiz', 45.00, 2, NULL),
+(DEFAULT, 'Noche de Música', 'Fernando López', 40.00, 3, NULL);
+
+-- Franjas Horarias
+INSERT INTO FranjasHorarias VALUES
+(DEFAULT, 1, 1, '08:00', 180),
+(DEFAULT, 2, 3, '14:00', 120),
+(DEFAULT, 3, 5, '20:00', 240);
+
+-- Patrocinadores
+INSERT INTO Patrocinadores VALUES
+(DEFAULT, 'Coca Cola', 365, 50000.00),
+(DEFAULT, 'Samsung', 180, 30000.00),
+(DEFAULT, 'Toyota', 90, 25000.00);
+
+-- Publicidad
+INSERT INTO Publicidad VALUES
+(1, 1, 300),
+(2, 2, 240),
+(3, 3, 180);

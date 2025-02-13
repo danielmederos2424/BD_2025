@@ -1,0 +1,41 @@
+-- Insertar Épocas
+INSERT INTO Epocas (nombre, caracteristicas, anio_inicio, anio_fin) VALUES
+('Barroco', 'Período caracterizado por el ornamento y la complejidad en la música', 1600, 1750),
+('Clasicismo', 'Época de elegancia y equilibrio en las formas musicales', 1730, 1820),
+('Romanticismo', 'Período de expresión emocional y libertad creativa', 1810, 1910);
+
+-- Insertar Géneros
+INSERT INTO Generos (nombre, caracteristicas, origenes, epoca_id) VALUES
+('Ópera Barroca', 'Obras dramáticas musicales con ornamentación vocal', 'Surgió en Italia como evolución del madrigal', 1),
+('Sonata Clásica', 'Composición instrumental con estructura definida', 'Desarrollada en Austria y Alemania', 2),
+('Sinfonía Romántica', 'Obra orquestal de gran escala con expresión dramática', 'Evolución de la sinfonía clásica', 3);
+
+-- Insertar Músicos
+INSERT INTO Musicos (nombre, fecha_nacimiento, fecha_muerte, historia, genero_id) VALUES
+('Johann Sebastian Bach', 1685, 1750, 'Compositor alemán, máximo exponente del Barroco', 1),
+('Wolfgang Amadeus Mozart', 1756, 1791, 'Prodigio musical austriaco del período clásico', 2),
+('Ludwig van Beethoven', 1770, 1827, 'Compositor alemán que marcó la transición al Romanticismo', 3);
+
+-- Insertar Instrumentos
+INSERT INTO Instrumentos (nombre, foto, lugar_creacion, creador, tipo) VALUES
+('Clavecín Ruckers', 'clavecin.jpg', 'Amberes, Bélgica', 'Familia Ruckers', 'Teclado'),
+('Forte Piano Cristofori', 'fortepiano.jpg', 'Florencia, Italia', 'Bartolomeo Cristofori', 'Teclado'),
+('Violín Stradivari', 'stradivari.jpg', 'Cremona, Italia', 'Antonio Stradivari', 'Cuerda');
+
+-- Insertar relaciones Géneros-Instrumentos
+INSERT INTO Generos_Instrumentos (genero_id, instrumento_id) VALUES
+(1, 1), -- Ópera Barroca - Clavecín
+(2, 2), -- Sonata Clásica - Forte Piano
+(3, 3); -- Sinfonía Romántica - Violín
+
+-- Insertar Obras
+INSERT INTO Obras (nombre, anio, partitura, genero_id) VALUES
+('La Pasión según San Mateo', 1727, 'matthaus_passion.pdf', 1),
+('Sonata para piano No. 14 "Claro de Luna"', 1801, 'moonlight_sonata.pdf', 2),
+('Sinfonía No. 5', 1808, 'symphony5.pdf', 3);
+
+-- Insertar relaciones Músicos-Obras
+INSERT INTO Musicos_Obras (musico_id, obra_id) VALUES
+(1, 1), -- Bach - Pasión según San Mateo
+(2, 2), -- Mozart - Sonata Claro de Luna
+(3, 3); -- Beethoven - Sinfonía No. 5

@@ -183,7 +183,7 @@ void mostrarInterpretes(connection &c) {
             "LEFT JOIN Performances perf ON p.performer_id = perf.performer_id "
             "LEFT JOIN Recordings r ON perf.recording_id = r.recording_id "
             "GROUP BY p.performer_id, p.name, p.biography "
-            "ORDER BY p.name;";
+            "ORDER BY p.performer_id;";
 
         nontransaction N(c);
         result R(N.exec(query));
@@ -302,7 +302,7 @@ void registrarGrabacion(connection &c) {
         }
 
         // Selección de compañía
-        result R_companies = W.exec("SELECT company_id, name FROM Companies ORDER BY name;");
+        result R_companies = W.exec("SELECT company_id, name FROM Companies ORDER BY company_id;");
         
         if (R_companies.empty()) {
             cout << "Error: No hay compañías registradas. Debe registrar una compañía primero." << endl;
@@ -346,7 +346,7 @@ void registrarGrabacion(connection &c) {
         do {
             cout << "\n=== Agregar Intérprete ===" << endl;
             
-            result R_performers = W.exec("SELECT performer_id, name FROM Performers ORDER BY name;");
+            result R_performers = W.exec("SELECT performer_id, name FROM Performers ORDER BY performer_id;");
             if (!R_performers.empty()) {
                 cout << "\nIntérpretes existentes:" << endl;
                 for (result::const_iterator row = R_performers.begin(); row != R_performers.end(); ++row) {
@@ -428,7 +428,7 @@ void registrarGrabacion(connection &c) {
         do {
             cout << "\n=== Agregar Copia Física ===" << endl;
             
-            result R_formats = W.exec("SELECT format_id, name FROM Formats ORDER BY name;");
+            result R_formats = W.exec("SELECT format_id, name FROM Formats ORDER BY format_id;");
             if (R_formats.empty()) {
                 cout << "No hay formatos disponibles. Debe registrar formatos primero." << endl;
                 break;
@@ -494,7 +494,7 @@ void eliminarGrabacion(connection &c) {
         work W(c);
         
         // Obtener grabaciones
-        result R = W.exec("SELECT recording_id, title, musical_category FROM Recordings ORDER BY title;");
+        result R = W.exec("SELECT recording_id, title, musical_category FROM Recordings ORDER BY recording_id;");
         
         if (R.empty()) {
             cout << "No hay grabaciones registradas." << endl;
